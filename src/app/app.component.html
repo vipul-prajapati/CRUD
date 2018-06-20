@@ -1,20 +1,88 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
+
+ <ng-template #create>
+    <h3> Create New Contact </h3>
+ </ng-template>
+<div class="container">
+    <form [formGroup]="userForm" (ngSubmit)="onUserFormSubmit()">
+      <div class=" formOuter">
+        <div class="row">
+          <div class="col-md-6">
+              <!-- <label>ID</label> 
+              <input type="text" class="form-control" style="width: 80%" />-->
+            
+              <label> First Name  </label>
+              <label *ngIf="userForm.get('first_name').invalid && processValidation" [ngClass] = "'error'"> is required. </label>
+              <input type="text" class="form-control" formControlName="first_name" style="width: 80%" />
+              <br />
+              <label > Email  </label>
+              <label *ngIf="userForm.get('email').invalid && processValidation" [ngClass] = "'error'"> is required. </label>
+              <input type="text" class="form-control"  formControlName="email" style="width: 80%" />
+              <br />
+            </div>
+            <div class="col-md-6">
+                <label > Last Name  </label>
+                <label *ngIf="userForm.get('last_name').invalid && processValidation" [ngClass] = "'error'">  is required. </label>
+                <input type="text"  class="form-control" formControlName="last_name" style="width: 80%" />
+                <br />
+                
+                <label > Phone </label>
+                <label *ngIf="userForm.get('phone_number').invalid && processValidation" [ngClass] = "'error'"> is required. </label>
+                <input type="number" class="form-control"  formControlName="phone_number" style="width: 80%" />
+               
+            </div>
+            <div class="col-md-6">
+               
+                <label > Status </label>
+                <label *ngIf="userForm.get('status').invalid && processValidation" [ngClass] = "'error'"> is required. </label>
+                <!-- <input type="text" class="form-control"  formControlName="status" style="width: 80%" />-->
+                <select class="form-control" formControlName="status" style="width: 80%">
+                  <option value=""  selected disabled>Select status</option>
+                  <option value="Active">Active</option>
+                  <option value="Deactive">Deactive</option>
+                </select> 
+                <span>Status should be Active / Deactive</span>
+            </div>
+           
+        </div>
+        <div class="row">
+    
+            <div class="col-md-12" style="margin: 10px 0px;">
+            <button *ngIf="!articleIdToUpdate" class="btn btn-primary">CREATE</button>  
+            <button *ngIf="articleIdToUpdate" class="btn btn-primary">UPDATE</button>  
+            <button (click)="backToCreateArticle()" *ngIf="articleIdToUpdate" class="btn btn-primary">Go Back</button> 
+            </div>
+          </div>
+      </div>
+
+      
+    </form>
+  
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Phone</th>
+        <th scope="col">Status</th>
+        <th scope="col" colspan="2">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        
+        <th scope="row">{{user.id}}</th>
+        <td>{{user.first_name}}</td>
+        <td>{{user.last_name}}</td>
+        <td>{{user.email}}</td>
+        <td>{{user.phone_number}}</td>
+        <td>{{user.status}}</td>
+        <td><button class="btn btn-primary" (click)="EditContact(user.id)">Edit</button></td>
+        <td><button class="btn btn-primary" (click)="deleteContact(user.id)">Delete</button></td>
+      </tr>
+      
+    </tbody>
+  </table>
 </div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
 

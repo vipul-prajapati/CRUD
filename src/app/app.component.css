@@ -1,0 +1,10 @@
+.formOuter { background: #f2f2f2;
+    margin: 10px 0px;
+    padding: 20px;
+    border: 1px solid #cccccc; }
+.error {
+    color: red;
+}
+.errorTxtBox {
+    border: 1px solid red;
+}
